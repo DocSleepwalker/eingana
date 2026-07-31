@@ -407,13 +407,11 @@
             const coords = item.coords || '???';
             const clickAttr = isFound ? `onclick="window.open('${imgSrc}', '_blank')"` : '';
 
-            // Формируем футер: если координаты есть, разбиваем по | на три строки
+            // Упрощённая логика футера
             let footerHtml;
             if (isFound && coords !== '???') {
                 const lines = coords.split(' | ');
                 footerHtml = lines.map(line => `<span class="coord-line">${line}</span>`).join('');
-            } else if (isFound) {
-                footerHtml = `<span class="unknown-coord">${t.coordsUnknown}</span>`;
             } else {
                 footerHtml = `<span class="unknown-coord">${t.coordsUnknown}</span>`;
             }
