@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eingana - Галерея снимков</title>
+    <!-- Мета-теги для SEO и соцсетей -->
+    <meta name="description" content="Коллекция из 110 уникальных снимков из интерактивного 3D-атласа Земли Eingana (2005-2006).">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+    <style>
+        /* --- ОБЩИЙ СТИЛЬ --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background-color: #1a2e1a; /* тёмно-зелёный фон */
+            background-image: radial-gradient(circle at 20% 30%, #2a452a, #0f1f0f);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #d4e6d4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(30, 50, 30, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 24px;
+            border: 1px solid rgba(120, 180, 120, 0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #b6e6b6;
+            text-shadow: 0 0 20px rgba(100, 200, 100, 0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #9ab89a;
+            margin-top: 8px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3a6a3a;
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #d4f0d4;
+            border: 1px solid #5a8a5a;
+            margin-top: 10px;
+        }
+
+        /* --- СЕТКА КАРТОЧЕК (11x10) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 18px;
+            margin-bottom: 50px;
+        }
+
+        /* --- КАРТОЧКА --- */
+        .card {
+            background: rgba(40, 65, 40, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 150, 100, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 30, 0, 0.7);
+            border-color: #7cb87c;
+        }
+
+        /* --- ЗАГОЛОВОК КАРТОЧКИ --- */
+        .card-title {
+            background: rgba(20, 40, 20, 0.7);
+            padding: 8px 8px 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+            line-height: 1.2;
+            color: #c6e6c6;
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+            border-bottom: 1px solid rgba(80, 130, 80, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        /* --- ОБЁРТКА ДЛЯ ФОТО --- */
+        .card-image {
+            position: relative;
+            width: 100%;
+            padding-bottom: 78%; /* чуть ниже, чтобы было место для подписи, примерно 4:3 */
+            background: #1f2e1f;
+            overflow: hidden;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            background: #1f2e1f;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.04);
+        }
+
+        /* --- ЗАГЛУШКА ДЛЯ ПРОПУЩЕННЫХ --- */
+        .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #263b26;
+            color: #6a8f6a;
+            font-size: 2.5rem;
+            font-weight: 300;
+            border: 2px dashed #4a6f4a;
+            border-radius: 0;
+            cursor: default;
+        }
+
+        .placeholder span {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            background: #1f301f;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: #8aaa8a;
+        }
+
+        .card-image .missing-click {
+            cursor: default;
+        }
+
+        /* --- ФУТЕР КАРТОЧКИ (координаты) --- */
+        .card-footer {
+            padding: 6px 8px 8px;
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #8db88d;
+            background: rgba(10, 25, 10, 0.4);
+            border-top: 1px solid rgba(60, 100, 60, 0.2);
+            letter-spacing: 0.5px;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-footer .unknown-coord {
+            color: #7a7a5a;
+            font-style: italic;
+        }
+
+        /* --- ИНФО-БЛОК ВНИЗУ --- */
+        .info-block {
+            background: rgba(30, 50, 30, 0.75);
+            backdrop-filter: blur(6px);
+            padding: 30px 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(120, 180, 120, 0.2);
+            margin-top: 20px;
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #c6dec6;
+        }
+
+        .info-block strong {
+            color: #b0e0b0;
+        }
+
+        .info-block code {
+            background: #1f331f;
+            padding: 3px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #d0f0d0;
+            border: 1px solid #3a5a3a;
+        }
+
+        /* --- АДАПТИВ (мобилки) --- */
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            header h1 { font-size: 2rem; }
+            .card-title { font-size: 0.65rem; }
+        }
+
+        @media (max-width: 450px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            body { padding: 15px 10px; }
+            .info-block { padding: 20px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🌍 Eingana · 3D-Атлас Земли</h1>
+        <p>Интерактивная галерея снимков из 3D-атласа Eingana.<br> Коллекция: <span id="foundCount" class="badge">0 / 110</span></p>
+    </header>
+
+    <!-- Сетка -->
+    <div class="grid" id="galleryGrid"></div>
+
+    <!-- Подвал с инструкцией -->
+    <div class="info-block">
+        <p><strong>📸 Как использовать снимки?</strong></p>
+        <p>
+            1. Нажми на любое фото, чтобы открыть его в полном размере.<br>
+            2. Сохрани изображение (ПКМ → «Сохранить как»).<br>
+            3. Помести файл <code>alXXX.JPG</code> в папку <code>album</code> в корне игры <strong>Eingana</strong>.<br>
+            4. Запусти игру — снимок появится в атласе, и ты сможешь посетить это место!
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #8aaa8a;">
+            ⚡ <strong>Не хватает 7 снимков</strong> — если у тебя есть недостающие, <a href="mailto:your-email@example.com" style="color: #8bc34a;">свяжись со мной</a>, и мы пополним коллекцию.
+        </p>
+    </div>
+</div>
+
+<script>
+    (async function() {
+        const grid = document.getElementById('galleryGrid');
+        const foundSpan = document.getElementById('foundCount');
+
+        try {
+            // 1. Загружаем данные из data.json
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error('Не удалось загрузить data.json');
+            const items = await response.json();
+
+            // 2. Сортируем по id (на всякий случай)
+            items.sort((a, b) => a.id - b.id);
+
+            // 3. Считаем найденные
+            const found = items.filter(item => item.status === 'found').length;
+            foundSpan.textContent = `${found} / ${items.length}`;
+
+            // 4. Генерируем карточки
+            let html = '';
+            items.forEach(item => {
+                const isFound = item.status === 'found';
+                const imgSrc = `album/al${String(item.id).padStart(3, '0')}.JPG`;
+                const title = item.title || `Объект #${item.id}`;
+                const coords = item.coords || '???';
+
+                // Открытие картинки в новой вкладке (только для найденных)
+                const clickAttr = isFound ? `onclick="window.open('${imgSrc}', '_blank')"` : '';
+
+                html += `
+                    <div class="card">
+                        <div class="card-title">${title}</div>
+                        <div class="card-image" ${clickAttr}>
+                            ${isFound ? `<img src="${imgSrc}" alt="${title}" loading="lazy">` : `
+                                <div class="placeholder">
+                                    ❓
+                                    <span>не найден</span>
+                                </div>
+                            `}
+                        </div>
+                        <div class="card-footer">
+                            ${isFound ? `📍 ${coords}` : `<span class="unknown-coord">⛔ координаты неизвестны</span>`}
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+
+        } catch (error) {
+            console.error('Ошибка загрузки галереи:', error);
+            grid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: rgba(200,50,50,0.15); border-radius: 20px;">
+                    <h3 style="color: #ff8a8a;">⚠️ Не удалось загрузить данные</h3>
+                    <p style="color: #bbbbbb;">Убедись, что файл <code>data.json</code> лежит рядом с index.html</p>
+                </div>
+            `;
+        }
+    })();
+</script>
+
+</body>
+</html>
