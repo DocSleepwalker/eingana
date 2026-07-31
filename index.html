@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eingana - Галерея снимков</title>
-    <!-- Мета-теги для SEO и соцсетей -->
-    <meta name="description" content="Коллекция из 110 уникальных снимков из интерактивного 3D-атласа Земли Eingana (2005-2006).">
+    <title>Eingana - 3D Earth Atlas Gallery</title>
+    <!-- Мета-теги для SEO (на английском, как основном) -->
+    <meta name="description" content="Collection of 110 unique snapshots from the interactive 3D Earth Atlas Eingana.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
     <style>
-        /* --- ОБЩИЙ СТИЛЬ --- */
+        /* --- ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ --- */
         * {
             margin: 0;
             padding: 0;
@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            background-color: #1a2e1a; /* тёмно-зелёный фон */
+            background-color: #1a2e1a;
             background-image: radial-gradient(circle at 20% 30%, #2a452a, #0f1f0f);
             min-height: 100vh;
             padding: 30px 20px;
@@ -29,7 +29,6 @@
             margin: 0 auto;
         }
 
-        /* --- ШАПКА --- */
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -69,7 +68,38 @@
             margin-top: 10px;
         }
 
-        /* --- СЕТКА КАРТОЧЕК (11x10) --- */
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .lang-btn {
+            background: rgba(60, 100, 60, 0.3);
+            border: 2px solid rgba(100, 160, 100, 0.3);
+            color: #9ab89a;
+            padding: 6px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            background: rgba(80, 140, 80, 0.3);
+            border-color: #7cb87c;
+        }
+
+        .lang-btn.active {
+            background: #3a7a3a;
+            border-color: #7cb87c;
+            color: #d4f0d4;
+            box-shadow: 0 0 20px rgba(80, 180, 80, 0.2);
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
@@ -77,7 +107,6 @@
             margin-bottom: 50px;
         }
 
-        /* --- КАРТОЧКА --- */
         .card {
             background: rgba(40, 65, 40, 0.6);
             backdrop-filter: blur(4px);
@@ -96,7 +125,6 @@
             border-color: #7cb87c;
         }
 
-        /* --- ЗАГОЛОВОК КАРТОЧКИ --- */
         .card-title {
             background: rgba(20, 40, 20, 0.7);
             padding: 8px 8px 6px;
@@ -114,11 +142,10 @@
             letter-spacing: 0.3px;
         }
 
-        /* --- ОБЁРТКА ДЛЯ ФОТО --- */
         .card-image {
             position: relative;
             width: 100%;
-            padding-bottom: 78%; /* чуть ниже, чтобы было место для подписи, примерно 4:3 */
+            padding-bottom: 78%;
             background: #1f2e1f;
             overflow: hidden;
             cursor: pointer;
@@ -140,7 +167,6 @@
             transform: scale(1.04);
         }
 
-        /* --- ЗАГЛУШКА ДЛЯ ПРОПУЩЕННЫХ --- */
         .placeholder {
             position: absolute;
             top: 0;
@@ -173,7 +199,6 @@
             cursor: default;
         }
 
-        /* --- ФУТЕР КАРТОЧКИ (координаты) --- */
         .card-footer {
             padding: 6px 8px 8px;
             text-align: center;
@@ -194,7 +219,6 @@
             font-style: italic;
         }
 
-        /* --- ИНФО-БЛОК ВНИЗУ --- */
         .info-block {
             background: rgba(30, 50, 30, 0.75);
             backdrop-filter: blur(6px);
@@ -220,7 +244,15 @@
             border: 1px solid #3a5a3a;
         }
 
-        /* --- АДАПТИВ (мобилки) --- */
+        .info-block a {
+            color: #8bc34a;
+            text-decoration: none;
+        }
+
+        .info-block a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 1100px) {
             .grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -251,87 +283,207 @@
 
 <div class="container">
     <header>
-        <h1>🌍 Eingana · 3D-Атлас Земли</h1>
-        <p>Интерактивная галерея снимков из 3D-атласа Eingana.<br> Коллекция: <span id="foundCount" class="badge">0 / 110</span></p>
+        <h1>🌍 Eingana · <span id="headerSub">3D Earth Atlas</span></h1>
+        <p id="headerDesc"><span id="galleryLabel">Interactive gallery of snapshots</span> from the 3D atlas Eingana.<br> <span id="collectionLabel">Collection</span>: <span id="foundCount" class="badge">0 / 110</span></p>
+        
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang="ru" onclick="switchLanguage('ru')">🇷🇺 Русский</button>
+            <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">🇬🇧 English</button>
+        </div>
     </header>
 
-    <!-- Сетка -->
     <div class="grid" id="galleryGrid"></div>
 
-    <!-- Подвал с инструкцией -->
-    <div class="info-block">
-        <p><strong>📸 Как использовать снимки?</strong></p>
-        <p>
-            1. Нажми на любое фото, чтобы открыть его в полном размере.<br>
-            2. Сохрани изображение (ПКМ → «Сохранить как»).<br>
-            3. Помести файл <code>alXXX.JPG</code> в папку <code>album</code> в корне игры <strong>Eingana</strong>.<br>
-            4. Запусти игру — снимок появится в атласе, и ты сможешь посетить это место!
-        </p>
-        <p style="margin-top: 10px; font-size: 0.9rem; color: #8aaa8a;">
-            ⚡ <strong>Не хватает 7 снимков</strong> — если у тебя есть недостающие, <a href="mailto:your-email@example.com" style="color: #8bc34a;">свяжись со мной</a>, и мы пополним коллекцию.
-        </p>
+    <div class="info-block" id="infoBlock">
+        <!-- Заполняется из JavaScript -->
     </div>
 </div>
 
 <script>
-    (async function() {
+    // --- ПЕРЕВОДЫ ВСЕХ ЭЛЕМЕНТОВ ИНТЕРФЕЙСА ---
+    const translations = {
+        ru: {
+            // Шапка
+            headerSub: '3D-Атлас Земли',
+            galleryLabel: 'Интерактивная галерея снимков',
+            collectionLabel: 'Коллекция',
+            
+            // Карточки
+            missing: 'не найден',
+            coordsUnknown: '⛔ координаты неизвестны',
+            
+            // Ошибки
+            notFound: '⚠️ Не удалось загрузить данные',
+            checkFile: 'Убедись, что файл data.json лежит рядом с index.html',
+            
+            // Инфо-блок
+            infoTitle: '📸 Как использовать снимки?',
+            infoStep1: '1. Нажми на любое фото, чтобы открыть его в полном размере.',
+            infoStep2: '2. Сохрани изображение (ПКМ → «Сохранить как»).',
+            infoStep3: '3. Помести файл <code>alXXX.JPG</code> в папку <code>album</code> в корне игры <strong>Eingana</strong>.',
+            infoStep4: '4. Запусти игру — снимок появится в атласе, и ты сможешь посетить это место!',
+            infoMissing: '⚡ <strong>Не хватает 7 снимков</strong> — если у тебя есть недостающие, <a href="mailto:iamtomhanks@yandex.ru">свяжись со мной</a>, и мы пополним коллекцию.'
+        },
+        en: {
+            // Header
+            headerSub: '3D Earth Atlas',
+            galleryLabel: 'Interactive gallery of snapshots',
+            collectionLabel: 'Collection',
+            
+            // Cards
+            missing: 'not found',
+            coordsUnknown: '⛔ coordinates unknown',
+            
+            // Errors
+            notFound: '⚠️ Failed to load data',
+            checkFile: 'Make sure data.json is in the same folder as index.html',
+            
+            // Info block
+            infoTitle: '📸 How to use snapshots?',
+            infoStep1: '1. Click on any photo to open it in full size.',
+            infoStep2: '2. Save the image (Right-click → "Save image as").',
+            infoStep3: '3. Place the file <code>alXXX.JPG</code> in the <code>album</code> folder in the root of the <strong>Eingana</strong> game.',
+            infoStep4: '4. Launch the game — the snapshot will appear in the atlas, and you will be able to visit this location!',
+            infoMissing: '⚡ <strong>7 snapshots are missing</strong> — if you have the missing ones, <a href="mailto:iamtomhanks@yandex.ru">contact me</a>, and we will complete the collection.'
+        }
+    };
+
+    let currentLang = 'en';
+    let galleryItems = [];
+
+    // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ---
+    function switchLanguage(lang) {
+        currentLang = lang;
+        
+        // Обновляем активную кнопку
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        // Обновляем интерфейс
+        updateInterface(lang);
+        
+        // Перерисовываем карточки
+        renderGallery();
+        
+        // Сохраняем выбор языка в localStorage
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    // --- ОБНОВЛЕНИЕ ИНТЕРФЕЙСА (шапка, подвал) ---
+    function updateInterface(lang) {
+        const t = translations[lang];
+        
+        document.getElementById('headerSub').textContent = t.headerSub;
+        document.getElementById('galleryLabel').textContent = t.galleryLabel;
+        document.getElementById('collectionLabel').textContent = t.collectionLabel;
+        
+        // Инфо-блок
+        const info = document.getElementById('infoBlock');
+        info.innerHTML = `
+            <p><strong>${t.infoTitle}</strong></p>
+            <p>${t.infoStep1}<br>${t.infoStep2}<br>${t.infoStep3}<br>${t.infoStep4}</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #8aaa8a;">${t.infoMissing}</p>
+        `;
+    }
+
+    // --- ОТРИСОВКА ГАЛЕРЕИ ---
+    function renderGallery() {
         const grid = document.getElementById('galleryGrid');
         const foundSpan = document.getElementById('foundCount');
+        const t = translations[currentLang];
 
-        try {
-            // 1. Загружаем данные из data.json
-            const response = await fetch('data.json');
-            if (!response.ok) throw new Error('Не удалось загрузить data.json');
-            const items = await response.json();
+        if (!galleryItems || galleryItems.length === 0) {
+            grid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: rgba(200,50,50,0.15); border-radius: 20px;">
+                    <h3 style="color: #ff8a8a;">${t.notFound}</h3>
+                    <p style="color: #bbbbbb;">${t.checkFile}</p>
+                </div>
+            `;
+            return;
+        }
 
-            // 2. Сортируем по id (на всякий случай)
-            items.sort((a, b) => a.id - b.id);
+        // Сортируем по id
+        galleryItems.sort((a, b) => a.id - b.id);
 
-            // 3. Считаем найденные
-            const found = items.filter(item => item.status === 'found').length;
-            foundSpan.textContent = `${found} / ${items.length}`;
+        // Считаем найденные
+        const found = galleryItems.filter(item => item.status === 'found').length;
+        foundSpan.textContent = `${found} / ${galleryItems.length}`;
 
-            // 4. Генерируем карточки
-            let html = '';
-            items.forEach(item => {
-                const isFound = item.status === 'found';
-                const imgSrc = `album/al${String(item.id).padStart(3, '0')}.JPG`;
-                const title = item.title || `Объект #${item.id}`;
-                const coords = item.coords || '???';
+        let html = '';
+        galleryItems.forEach(item => {
+            const isFound = item.status === 'found';
+            const imgSrc = `album/al${String(item.id).padStart(3, '0')}.JPG`;
+            
+            // Выбираем заголовок в зависимости от языка
+            let title;
+            if (currentLang === 'ru') {
+                title = item.title_ru || `Снимок ${item.id + 1}`;
+            } else {
+                title = item.title_en || `Snapshot ${item.id + 1}`;
+            }
+            
+            const coords = item.coords || '???';
 
-                // Открытие картинки в новой вкладке (только для найденных)
-                const clickAttr = isFound ? `onclick="window.open('${imgSrc}', '_blank')"` : '';
+            const clickAttr = isFound ? `onclick="window.open('${imgSrc}', '_blank')"` : '';
 
-                html += `
-                    <div class="card">
-                        <div class="card-title">${title}</div>
-                        <div class="card-image" ${clickAttr}>
-                            ${isFound ? `<img src="${imgSrc}" alt="${title}" loading="lazy">` : `
-                                <div class="placeholder">
-                                    ❓
-                                    <span>не найден</span>
-                                </div>
-                            `}
-                        </div>
-                        <div class="card-footer">
-                            ${isFound ? `📍 ${coords}` : `<span class="unknown-coord">⛔ координаты неизвестны</span>`}
-                        </div>
+            html += `
+                <div class="card">
+                    <div class="card-title">${title}</div>
+                    <div class="card-image" ${clickAttr}>
+                        ${isFound ? `<img src="${imgSrc}" alt="${title}" loading="lazy">` : `
+                            <div class="placeholder">
+                                ❓
+                                <span>${t.missing}</span>
+                            </div>
+                        `}
                     </div>
-                `;
+                    <div class="card-footer">
+                        ${isFound ? `📍 ${coords}` : `<span class="unknown-coord">${t.coordsUnknown}</span>`}
+                    </div>
+                </div>
+            `;
+        });
+
+        grid.innerHTML = html;
+    }
+
+    // --- ЗАГРУЗКА ДАННЫХ ---
+    (async function() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error('Failed to load data.json');
+            galleryItems = await response.json();
+
+            // Определяем язык пользователя
+            const savedLang = localStorage.getItem('preferredLang');
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            if (savedLang) {
+                currentLang = savedLang;
+            } else if (browserLang && browserLang.startsWith('ru')) {
+                currentLang = 'ru';
+            } else {
+                currentLang = 'en';
+            }
+
+            // Активируем правильную кнопку
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
             });
 
-            grid.innerHTML = html;
+            // Обновляем интерфейс и рендерим
+            updateInterface(currentLang);
+            renderGallery();
 
         } catch (error) {
             console.error('Ошибка загрузки галереи:', error);
-            grid.innerHTML = `
-                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: rgba(200,50,50,0.15); border-radius: 20px;">
-                    <h3 style="color: #ff8a8a;">⚠️ Не удалось загрузить данные</h3>
-                    <p style="color: #bbbbbb;">Убедись, что файл <code>data.json</code> лежит рядом с index.html</p>
-                </div>
-            `;
+            renderGallery(); // Покажет ошибку
         }
     })();
+
+    // Делаем функцию глобальной для onclick
+    window.switchLanguage = switchLanguage;
 </script>
 
 </body>
