@@ -130,6 +130,462 @@
             text-align: center;
             font-weight: 600;
             font-size: 0.75rem;
+            line-height: 1.3;
+            color: #c6e6c6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+            border-bottom: 1px solid rgba(80, 130, 80, 0.3);
+            letter-spacing: 0.3px;
+            flex: 1 0 auto;
+            min-height: 34px;
+        }
+
+        .card-image {
+            position: relative;
+            width: 100%;
+            padding-bottom: 78%;
+            background: #1f2e1f;
+            overflow: hidden;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            background: #1f2e1f;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.04);
+        }
+
+        .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #263b26;
+            color: #6a8f6a;
+            font-size: 2.5rem;
+            font-weight: 300;
+            border: 2px dashed #4a6f4a;
+            border-radius: 0;
+            cursor: default;
+        }
+
+        .placeholder span {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            background: #1f301f;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: #8aaa8a;
+        }
+
+        .card-image .missing-click {
+            cursor: default;
+        }
+
+        .card-footer {
+            padding: 6px 8px;
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #8db88d;
+            background: rgba(10, 25, 10, 0.4);
+            border-top: 1px solid rgba(60, 100, 60, 0.2);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            min-height: 26px;
+        }
+
+        .card-footer .unknown-coord {
+            color: #7a7a5a;
+            font-style: italic;
+        }
+
+        .info-block {
+            background: rgba(30, 50, 30, 0.75);
+            backdrop-filter: blur(6px);
+            padding: 30px 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(120, 180, 120, 0.2);
+            margin-top: 20px;
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #c6dec6;
+        }
+
+        .info-block strong {
+            color: #b0e0b0;
+        }
+
+        .info-block code {
+            background: #1f331f;
+            padding: 3px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #d0f0d0;
+            border: 1px solid #3a5a3a;
+        }
+
+        .info-block a {
+            color: #8bc34a;
+            text-decoration: none;
+        }
+
+        .info-block a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            header h1 { font-size: 2rem; }
+            .card-title { font-size: 0.65rem; }
+        }
+
+        @media (max-width: 450px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            body { padding: 15px 10px; }
+            .info-block { padding: 20px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🌍 Eingana · <span id="headerSub">Virtual 3D World Atlas</span></h1>
+        <p id="headerDesc"><span id="galleryLabel">Interactive gallery of snapshots</span> <span id="atlasLabel">from the Eingana: Virtual 3D World Atlas.</span><br> <span id="collectionLabel">Collection</span>: <span id="foundCount" class="badge">0 / 110</span></p>
+        
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang="ru" onclick="switchLanguage('ru')">🇷🇺 Русский</button>
+            <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">🇬🇧 English</button>
+        </div>
+    </header>
+
+    <div class="grid" id="galleryGrid"></div>
+
+    <div class="info-block" id="infoBlock"></div>
+
+    <div class="footer" style="text-align: center; margin-top: 30px; padding: 20px; color: #7a9a7a; font-size: 0.85rem; border-top: 1px solid rgba(100, 150, 100, 0.15);">
+        DocSleepwalker · 2026
+    </div>
+</div>
+
+<script>
+    const translations = {
+        ru: {
+            headerSub: '3D-Атлас Земли',
+            galleryLabel: 'Интерактивная галерея снимков',
+            atlasLabel: 'из Eingana: 3D-Атлас Земли.',
+            collectionLabel: 'Коллекция',
+            missing: 'не найден',
+            coordsUnknown: '⛔ координаты неизвестны',
+            notFound: '⚠️ Не удалось загрузить данные',
+            checkFile: 'Убедись, что файл data.json лежит рядом с index.html',
+            infoTitle: '📸 Как использовать снимки?',
+            infoStep1: '1. Нажми на любое фото, чтобы открыть его в полном размере.',
+            infoStep2: '2. Сохрани изображение (ПКМ → «Сохранить как»).',
+            infoStep3: '3. Помести файл <code>alXXX.JPG</code> в папку <code>album</code> в корне игры <strong>Eingana</strong>.',
+            infoStep4: '4. Запусти игру — снимок появится в атласе, и ты сможешь посетить это место!',
+            infoMissing: 'Если у вас есть недостающие снимки, напишите мне на <a href="mailto:iamtomhanks@yandex.ru">iamtomhanks@yandex.ru</a>, и мы пополним коллекцию.'
+        },
+        en: {
+            headerSub: 'Virtual 3D World Atlas',
+            galleryLabel: 'Interactive gallery of snapshots',
+            atlasLabel: 'from the Eingana: Virtual 3D World Atlas.',
+            collectionLabel: 'Collection',
+            missing: 'not found',
+            coordsUnknown: '⛔ coordinates unknown',
+            notFound: '⚠️ Failed to load data',
+            checkFile: 'Make sure data.json is in the same folder as index.html',
+            infoTitle: '📸 How to use snapshots?',
+            infoStep1: '1. Click on any photo to open it in full size.',
+            infoStep2: '2. Save the image (Right-click → "Save image as").',
+            infoStep3: '3. Place the file <code>alXXX.JPG</code> in the <code>album</code> folder in the root of the <strong>Eingana</strong> game.',
+            infoStep4: '4. Launch the game — the snapshot will appear in the atlas, and you will be able to visit this location!',
+            infoMissing: 'If you have the missing snapshots, send them to <a href="mailto:iamtomhanks@yandex.ru">iamtomhanks@yandex.ru</a>, and we will complete the collection.'
+        }
+    };
+
+    let currentLang = 'en';
+    let galleryItems = [];
+
+    function switchLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        updateInterface(lang);
+        renderGallery();
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    function updateInterface(lang) {
+        const t = translations[lang];
+        document.getElementById('headerSub').textContent = t.headerSub;
+        document.getElementById('galleryLabel').textContent = t.galleryLabel;
+        document.getElementById('atlasLabel').textContent = t.atlasLabel;
+        document.getElementById('collectionLabel').textContent = t.collectionLabel;
+        
+        document.getElementById('infoBlock').innerHTML = `
+            <p><strong>${t.infoTitle}</strong></p>
+            <p>${t.infoStep1}<br>${t.infoStep2}<br>${t.infoStep3}<br>${t.infoStep4}</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #8aaa8a;">${t.infoMissing}</p>
+        `;
+    }
+
+    function renderGallery() {
+        const grid = document.getElementById('galleryGrid');
+        const foundSpan = document.getElementById('foundCount');
+        const t = translations[currentLang];
+
+        if (!galleryItems || galleryItems.length === 0) {
+            grid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: rgba(200,50,50,0.15); border-radius: 20px;">
+                    <h3 style="color: #ff8a8a;">${t.notFound}</h3>
+                    <p style="color: #bbbbbb;">${t.checkFile}</p>
+                </div>
+            `;
+            return;
+        }
+
+        galleryItems.sort((a, b) => a.id - b.id);
+        const found = galleryItems.filter(item => item.status === 'found').length;
+        foundSpan.textContent = `${found} / ${galleryItems.length}`;
+
+        let html = '';
+        galleryItems.forEach(item => {
+            const isFound = item.status === 'found';
+            const imgSrc = `album/al${String(item.id).padStart(3, '0')}.JPG`;
+            
+            let title;
+            if (currentLang === 'ru') {
+                title = item.title_ru || `Снимок ${item.id + 1}`;
+            } else {
+                title = item.title_en || `Snapshot ${item.id + 1}`;
+            }
+            
+            const coords = item.coords || '???';
+            const clickAttr = isFound ? `onclick="window.open('${imgSrc}', '_blank')"` : '';
+
+            html += `
+                <div class="card">
+                    <div class="card-title">${title}</div>
+                    <div class="card-image" ${clickAttr}>
+                        ${isFound ? `<img src="${imgSrc}" alt="${title}" loading="lazy">` : `
+                            <div class="placeholder">
+                                ❓
+                                <span>${t.missing}</span>
+                            </div>
+                        `}
+                    </div>
+                    <div class="card-footer">
+                        ${isFound ? `📍 ${coords}` : `<span class="unknown-coord">${t.coordsUnknown}</span>`}
+                    </div>
+                </div>
+            `;
+        });
+
+        grid.innerHTML = html;
+    }
+
+    (async function() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error('Failed to load data.json');
+            galleryItems = await response.json();
+
+            const savedLang = localStorage.getItem('preferredLang');
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            if (savedLang) {
+                currentLang = savedLang;
+            } else if (browserLang && browserLang.startsWith('ru')) {
+                currentLang = 'ru';
+            } else {
+                currentLang = 'en';
+            }
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
+
+            updateInterface(currentLang);
+            renderGallery();
+
+        } catch (error) {
+            console.error('Ошибка загрузки галереи:', error);
+            renderGallery();
+        }
+    })();
+
+    window.switchLanguage = switchLanguage;
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eingana: Virtual 3D World Atlas Gallery</title>
+    <meta name="description" content="Collection of 110 unique snapshots from the Eingana: Virtual 3D World Atlas.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background-color: #1a2e1a;
+            background-image: radial-gradient(circle at 20% 30%, #2a452a, #0f1f0f);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #d4e6d4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(30, 50, 30, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 24px;
+            border: 1px solid rgba(120, 180, 120, 0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #b6e6b6;
+            text-shadow: 0 0 20px rgba(100, 200, 100, 0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #9ab89a;
+            margin-top: 8px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3a6a3a;
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #d4f0d4;
+            border: 1px solid #5a8a5a;
+            margin-top: 10px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .lang-btn {
+            background: rgba(60, 100, 60, 0.3);
+            border: 2px solid rgba(100, 160, 100, 0.3);
+            color: #9ab89a;
+            padding: 6px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            background: rgba(80, 140, 80, 0.3);
+            border-color: #7cb87c;
+        }
+
+        .lang-btn.active {
+            background: #3a7a3a;
+            border-color: #7cb87c;
+            color: #d4f0d4;
+            box-shadow: 0 0 20px rgba(80, 180, 80, 0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 18px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(40, 65, 40, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 150, 100, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 30, 0, 0.7);
+            border-color: #7cb87c;
+        }
+
+        .card-title {
+            background: rgba(20, 40, 20, 0.7);
+            padding: 8px 8px 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75rem;
             line-height: 1.2;
             color: #c6e6c6;
             display: flex;
