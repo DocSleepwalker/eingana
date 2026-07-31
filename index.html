@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eingana: Virtual 3D World Atlas Gallery</title>
-    <!-- Мета-теги для SEO (на английском, как основном) -->
     <meta name="description" content="Collection of 110 unique snapshots from the Eingana: Virtual 3D World Atlas.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
     <style>
-        /* --- ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ --- */
         * {
             margin: 0;
             padding: 0;
@@ -117,6 +115,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            height: 100%;
         }
 
         .card:hover {
@@ -133,13 +132,14 @@
             font-size: 0.75rem;
             line-height: 1.2;
             color: #c6e6c6;
-            min-height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
             word-break: break-word;
             border-bottom: 1px solid rgba(80, 130, 80, 0.3);
             letter-spacing: 0.3px;
+            flex: 1;
+            min-height: 34px;
         }
 
         .card-image {
@@ -208,10 +208,11 @@
             background: rgba(10, 25, 10, 0.4);
             border-top: 1px solid rgba(60, 100, 60, 0.2);
             letter-spacing: 0.5px;
-            min-height: 28px;
+            min-height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .card-footer .unknown-coord {
@@ -294,34 +295,24 @@
 
     <div class="grid" id="galleryGrid"></div>
 
-    <div class="info-block" id="infoBlock">
-        <!-- Заполняется из JavaScript -->
-    </div>
+    <div class="info-block" id="infoBlock"></div>
 
     <div class="footer" style="text-align: center; margin-top: 30px; padding: 20px; color: #7a9a7a; font-size: 0.85rem; border-top: 1px solid rgba(100, 150, 100, 0.15);">
-    DocSleepwalker · 2026
+        DocSleepwalker · 2026
     </div>
 </div>
 
 <script>
-    // --- ПЕРЕВОДЫ ВСЕХ ЭЛЕМЕНТОВ ИНТЕРФЕЙСА ---
     const translations = {
         ru: {
-            // Шапка
             headerSub: '3D-Атлас Земли',
             galleryLabel: 'Интерактивная галерея снимков',
             atlasLabel: 'из Eingana: 3D-Атлас Земли.',
             collectionLabel: 'Коллекция',
-            
-            // Карточки
             missing: 'не найден',
             coordsUnknown: '⛔ координаты неизвестны',
-            
-            // Ошибки
             notFound: '⚠️ Не удалось загрузить данные',
             checkFile: 'Убедись, что файл data.json лежит рядом с index.html',
-            
-            // Инфо-блок
             infoTitle: '📸 Как использовать снимки?',
             infoStep1: '1. Нажми на любое фото, чтобы открыть его в полном размере.',
             infoStep2: '2. Сохрани изображение (ПКМ → «Сохранить как»).',
@@ -330,21 +321,14 @@
             infoMissing: 'Если у вас есть недостающие снимки, напишите мне на <a href="mailto:iamtomhanks@yandex.ru">iamtomhanks@yandex.ru</a>, и мы пополним коллекцию.'
         },
         en: {
-            // Header
             headerSub: 'Virtual 3D World Atlas',
             galleryLabel: 'Interactive gallery of snapshots',
             atlasLabel: 'from the Eingana: Virtual 3D World Atlas.',
             collectionLabel: 'Collection',
-            
-            // Cards
             missing: 'not found',
             coordsUnknown: '⛔ coordinates unknown',
-            
-            // Errors
             notFound: '⚠️ Failed to load data',
             checkFile: 'Make sure data.json is in the same folder as index.html',
-            
-            // Info block
             infoTitle: '📸 How to use snapshots?',
             infoStep1: '1. Click on any photo to open it in full size.',
             infoStep2: '2. Save the image (Right-click → "Save image as").',
@@ -357,44 +341,30 @@
     let currentLang = 'en';
     let galleryItems = [];
 
-    // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ---
     function switchLanguage(lang) {
         currentLang = lang;
-        
-        // Обновляем активную кнопку
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
-
-        // Обновляем интерфейс
         updateInterface(lang);
-        
-        // Перерисовываем карточки
         renderGallery();
-        
-        // Сохраняем выбор языка в localStorage
         localStorage.setItem('preferredLang', lang);
     }
 
-    // --- ОБНОВЛЕНИЕ ИНТЕРФЕЙСА (шапка, подвал) ---
     function updateInterface(lang) {
         const t = translations[lang];
-        
         document.getElementById('headerSub').textContent = t.headerSub;
         document.getElementById('galleryLabel').textContent = t.galleryLabel;
         document.getElementById('atlasLabel').textContent = t.atlasLabel;
         document.getElementById('collectionLabel').textContent = t.collectionLabel;
         
-        // Инфо-блок
-        const info = document.getElementById('infoBlock');
-        info.innerHTML = `
+        document.getElementById('infoBlock').innerHTML = `
             <p><strong>${t.infoTitle}</strong></p>
             <p>${t.infoStep1}<br>${t.infoStep2}<br>${t.infoStep3}<br>${t.infoStep4}</p>
             <p style="margin-top: 10px; font-size: 0.9rem; color: #8aaa8a;">${t.infoMissing}</p>
         `;
     }
 
-    // --- ОТРИСОВКА ГАЛЕРЕИ ---
     function renderGallery() {
         const grid = document.getElementById('galleryGrid');
         const foundSpan = document.getElementById('foundCount');
@@ -410,10 +380,7 @@
             return;
         }
 
-        // Сортируем по id
         galleryItems.sort((a, b) => a.id - b.id);
-
-        // Считаем найденные
         const found = galleryItems.filter(item => item.status === 'found').length;
         foundSpan.textContent = `${found} / ${galleryItems.length}`;
 
@@ -422,7 +389,6 @@
             const isFound = item.status === 'found';
             const imgSrc = `album/al${String(item.id).padStart(3, '0')}.JPG`;
             
-            // Выбираем заголовок в зависимости от языка
             let title;
             if (currentLang === 'ru') {
                 title = item.title_ru || `Снимок ${item.id + 1}`;
@@ -431,7 +397,6 @@
             }
             
             const coords = item.coords || '???';
-
             const clickAttr = isFound ? `onclick="window.open('${imgSrc}', '_blank')"` : '';
 
             html += `
@@ -455,14 +420,12 @@
         grid.innerHTML = html;
     }
 
-    // --- ЗАГРУЗКА ДАННЫХ ---
     (async function() {
         try {
             const response = await fetch('data.json');
             if (!response.ok) throw new Error('Failed to load data.json');
             galleryItems = await response.json();
 
-            // Определяем язык пользователя
             const savedLang = localStorage.getItem('preferredLang');
             const browserLang = navigator.language || navigator.userLanguage;
             
@@ -474,22 +437,19 @@
                 currentLang = 'en';
             }
 
-            // Активируем правильную кнопку
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === currentLang);
             });
 
-            // Обновляем интерфейс и рендерим
             updateInterface(currentLang);
             renderGallery();
 
         } catch (error) {
             console.error('Ошибка загрузки галереи:', error);
-            renderGallery(); // Покажет ошибку
+            renderGallery();
         }
     })();
 
-    // Делаем функцию глобальной для onclick
     window.switchLanguage = switchLanguage;
 </script>
 
