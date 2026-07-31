@@ -52,7 +52,7 @@
   { "id": 46, "title_ru": "Снимок 47", "title_en": "Snapshot 47", "coords": "???", "status": "found" },
   { "id": 47, "title_ru": "Снимок 48", "title_en": "Snapshot 48", "coords": "???", "status": "found" },
   { "id": 48, "title_ru": "Снимок 49", "title_en": "Snapshot 49", "coords": "???", "status": "found" },
-  { "id": 49, "title_ru": "Снимок 50", "title_en": "Snapshot 50", "coords": "???", "status": "found" },
+  { "id": 49, "title_ru": "Снимок 50", "title_en": "Snapshot 50", "coords": "???", "status": "missing" },
   
   { "id": 50, "title_ru": "Снимок 51", "title_en": "Snapshot 51", "coords": "???", "status": "found" },
   { "id": 51, "title_ru": "Снимок 52", "title_en": "Snapshot 52", "coords": "???", "status": "found" },
