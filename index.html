@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eingana - 3D Earth Atlas Gallery</title>
+    <title>Eingana: Virtual 3D World Atlas Gallery</title>
     <!-- Мета-теги для SEO (на английском, как основном) -->
-    <meta name="description" content="Collection of 110 unique snapshots from the interactive 3D Earth Atlas Eingana.">
+    <meta name="description" content="Collection of 110 unique snapshots from the Eingana: Virtual 3D World Atlas.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
     <style>
         /* --- ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ --- */
@@ -283,8 +283,8 @@
 
 <div class="container">
     <header>
-        <h1>🌍 Eingana · <span id="headerSub">3D Earth Atlas</span></h1>
-        <p id="headerDesc"><span id="galleryLabel">Interactive gallery of snapshots</span> from the 3D atlas Eingana.<br> <span id="collectionLabel">Collection</span>: <span id="foundCount" class="badge">0 / 110</span></p>
+        <h1>🌍 Eingana · <span id="headerSub">Virtual 3D World Atlas</span></h1>
+        <p id="headerDesc"><span id="galleryLabel">Interactive gallery of snapshots</span> <span id="atlasLabel">from the Eingana: Virtual 3D World Atlas.</span><br> <span id="collectionLabel">Collection</span>: <span id="foundCount" class="badge">0 / 110</span></p>
         
         <div class="lang-switcher">
             <button class="lang-btn" data-lang="ru" onclick="switchLanguage('ru')">🇷🇺 Русский</button>
@@ -306,6 +306,7 @@
             // Шапка
             headerSub: '3D-Атлас Земли',
             galleryLabel: 'Интерактивная галерея снимков',
+            atlasLabel: 'из Eingana. 3D-Атлас Земли.',
             collectionLabel: 'Коллекция',
             
             // Карточки
@@ -322,12 +323,13 @@
             infoStep2: '2. Сохрани изображение (ПКМ → «Сохранить как»).',
             infoStep3: '3. Помести файл <code>alXXX.JPG</code> в папку <code>album</code> в корне игры <strong>Eingana</strong>.',
             infoStep4: '4. Запусти игру — снимок появится в атласе, и ты сможешь посетить это место!',
-            infoMissing: '⚡ <strong>Не хватает 7 снимков</strong> — если у тебя есть недостающие, <a href="mailto:iamtomhanks@yandex.ru">свяжись со мной</a>, и мы пополним коллекцию.'
+            infoMissing: '⚡ <strong>Не хватает 7 снимков</strong> — если у тебя есть недостающие, <a href="mailto:your-email@example.com">свяжись со мной</a>, и мы пополним коллекцию.'
         },
         en: {
             // Header
             headerSub: '3D Earth Atlas',
             galleryLabel: 'Interactive gallery of snapshots',
+            atlasLabel: 'from the 3D atlas Eingana.',
             collectionLabel: 'Collection',
             
             // Cards
@@ -344,7 +346,7 @@
             infoStep2: '2. Save the image (Right-click → "Save image as").',
             infoStep3: '3. Place the file <code>alXXX.JPG</code> in the <code>album</code> folder in the root of the <strong>Eingana</strong> game.',
             infoStep4: '4. Launch the game — the snapshot will appear in the atlas, and you will be able to visit this location!',
-            infoMissing: '⚡ <strong>7 snapshots are missing</strong> — if you have the missing ones, <a href="mailto:iamtomhanks@yandex.ru">contact me</a>, and we will complete the collection.'
+            infoMissing: '⚡ <strong>7 snapshots are missing</strong> — if you have the missing ones, <a href="mailto:your-email@example.com">contact me</a>, and we will complete the collection.'
         }
     };
 
@@ -376,6 +378,7 @@
         
         document.getElementById('headerSub').textContent = t.headerSub;
         document.getElementById('galleryLabel').textContent = t.galleryLabel;
+        document.getElementById('atlasLabel').textContent = t.atlasLabel;
         document.getElementById('collectionLabel').textContent = t.collectionLabel;
         
         // Инфо-блок
