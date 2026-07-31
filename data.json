@@ -1,5 +1,5 @@
 [
-  { "id": 0, "title_ru": "Корова", "title_en": "Cow", "coords": "???", "status": "found" },
+  { "id": 0, "title_ru": "Корова", "title_en": "Cow", "coords": "N 49°38'25\" E 4°47'52\", 251 m", "status": "found" },
   { "id": 1, "title_ru": "Дойная корова", "title_en": "Milking Cow", "coords": "???", "status": "found" },
   { "id": 2, "title_ru": "Овца", "title_en": "Sheep", "coords": "???", "status": "found" },
   { "id": 3, "title_ru": "Птица", "title_en": "Bird", "coords": "???", "status": "found" },
