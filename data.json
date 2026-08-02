@@ -117,6 +117,6 @@
   { "id": 105, "title_ru": "Робинзон", "title_en": "Robinson", "coords": "???", "status": "missing" },
   { "id": 106, "title_ru": "Сумасшедшая корова", "title_en": "Crazy Cow", "coords": "N 45°52'11\" | E 2°32'40\" | 705 m", "status": "found" },
   { "id": 107, "title_ru": "Йети", "title_en": "Yeti", "coords": "N 34°54'36\" | E 75°23'56\" | 3,877 m", "status": "found" },
-  { "id": 108, "title_ru": "msat", "title_en": "M Sat", "coords": "N 45°45'49\" | E 3°08'10\" | 347 m", "status": "found" },
+  { "id": 108, "title_ru": "M Sat", "title_en": "M Sat", "coords": "N 45°45'49\" | E 3°08'10\" | 347 m", "status": "found" },
   { "id": 109, "title_ru": "Команда разработчиков", "title_en": "EMG", "coords": "S 9°23'28\" | E 46°28'39\" | 664 m", "status": "found" }
 ]
