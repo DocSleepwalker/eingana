@@ -326,6 +326,7 @@
             infoStep2: '2. Сохрани изображение (ПКМ → «Сохранить как»).',
             infoStep3: '3. Помести файл <code>alXXX.JPG</code> в папку <code>album</code> в корне игры <strong>Eingana</strong>.',
             infoStep4: '4. Запусти игру — снимок появится в атласе, и ты сможешь посетить это место!',
+            infoStep5: '5. Если снимок по каким-то причинам не импортируется в игру, ты всегда можешь найти этот объект вручную — используй координаты и высоту над уровнем моря, указанные в карточке.',
             infoMissing: 'Если у вас есть недостающие снимки, напишите мне на <a href="mailto:iamtomhanks@yandex.ru">iamtomhanks@yandex.ru</a>, и мы пополним коллекцию.'
         },
         en: {
@@ -342,6 +343,7 @@
             infoStep2: '2. Save the image (Right-click → "Save image as").',
             infoStep3: '3. Place the file <code>alXXX.JPG</code> in the <code>album</code> folder in the root of the <strong>Eingana</strong> game.',
             infoStep4: '4. Launch the game — the snapshot will appear in the atlas, and you will be able to visit this location!',
+            infoStep5: '5. If the snapshot doesn\'t import into the game for some reason, you can always find this location manually — use the coordinates and altitude above sea level shown on the card.',
             infoMissing: 'If you have the missing snapshots, send them to <a href="mailto:iamtomhanks@yandex.ru">iamtomhanks@yandex.ru</a>, and we will complete the collection.'
         }
     };
@@ -368,7 +370,7 @@
         
         document.getElementById('infoBlock').innerHTML = `
             <p><strong>${t.infoTitle}</strong></p>
-            <p>${t.infoStep1}<br>${t.infoStep2}<br>${t.infoStep3}<br>${t.infoStep4}</p>
+            <p>${t.infoStep1}<br>${t.infoStep2}<br>${t.infoStep3}<br>${t.infoStep4}<br>${t.infoStep5}</p>
             <p style="margin-top: 10px; font-size: 0.9rem; color: #8aaa8a;">${t.infoMissing}</p>
         `;
     }
