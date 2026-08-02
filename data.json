@@ -1,9 +1,9 @@
 [
   { "id": 0, "title_ru": "Корова", "title_en": "Cow", "coords": "N 49°38'25\" | E 4°47'52\" | 251 m", "status": "found" },
-  { "id": 1, "title_ru": "Дойная корова", "title_en": "Milking Cow", "coords": "N 49°38'22\" | E 4°47'34\" | 263 m", "status": "found" },
+  { "id": 1, "title_ru": "Дойная корова", "title_en": "Dairy Cow", "coords": "N 49°38'22\" | E 4°47'34\" | 263 m", "status": "found" },
   { "id": 2, "title_ru": "Овца", "title_en": "Sheep", "coords": "N 49°39'23\" | E 4°47'35\" | 261 m", "status": "found" },
   { "id": 3, "title_ru": "Птица", "title_en": "Bird", "coords": "N 49°37'59\" | E 4°47'19\" | 295 m", "status": "found" },
-  { "id": 4, "title_ru": "Курица", "title_en": "Chicken", "coords": "N 49°39'11\" | E 4°47'30\" | 273 m", "status": "found" },
+  { "id": 4, "title_ru": "Курица", "title_en": "Hen", "coords": "N 49°39'11\" | E 4°47'30\" | 273 m", "status": "found" },
   { "id": 5, "title_ru": "Гусь", "title_en": "Goose", "coords": "N 37°38'29\" | E 22°15'23\" | 1,912 m", "status": "found" },
   { "id": 6, "title_ru": "Свинья", "title_en": "Pig", "coords": "N 49°36'46\" | E 4°45'19\" | 186 m", "status": "found" },
   { "id": 7, "title_ru": "Кролик", "title_en": "Rabbit", "coords": "N 57°18'01\" | W 2°14'14\" | 146 m", "status": "found" },
@@ -85,17 +85,17 @@
   { "id": 76, "title_ru": "Сова", "title_en": "Owl", "coords": "N 13°27'35\" | W 84°13'45\" | 21 m", "status": "found" },
   { "id": 77, "title_ru": "Полярная сова", "title_en": "Snowy Owl", "coords": "N 61°06'11\" | W 158°01'44\" | 238 m", "status": "found" },
   { "id": 78, "title_ru": "Черепаха", "title_en": "Turtle", "coords": "S 0°46'01\" | W 89°28'07\" | 0 m", "status": "found" },
-  { "id": 79, "title_ru": "Эйфелева башня", "title_en": "Eiffel Tower", "coords": "N 48°51'14\" | E 2°17'17\" | 31 m", "status": "found" },
+  { "id": 79, "title_ru": "Эйфелева башня", "title_en": "The Eiffel Tower", "coords": "N 48°51'14\" | E 2°17'17\" | 31 m", "status": "found" },
   
-  { "id": 80, "title_ru": "Триумфальная арка", "title_en": "Arc de Triomphe", "coords": "N 48°52'08\" | E 2°17'19\" | 32 m", "status": "found" },
-  { "id": 81, "title_ru": "Собор Парижской Богоматери", "title_en": "Notre Dame Cathedral", "coords": "N 48°50'53\" | E 2°20'40\" | 30 m", "status": "found" },
-  { "id": 82, "title_ru": "Елисейский дворец", "title_en": "Elysée Palace", "coords": "N 48°51'55\" | E 2°18'37\" | 59 m", "status": "found" },
+  { "id": 80, "title_ru": "Триумфальная арка", "title_en": "The Triumphal Arch", "coords": "N 48°52'08\" | E 2°17'19\" | 32 m", "status": "found" },
+  { "id": 81, "title_ru": "Собор Парижской Богоматери", "title_en": "Notre Dame of Paris", "coords": "N 48°50'53\" | E 2°20'40\" | 30 m", "status": "found" },
+  { "id": 82, "title_ru": "Елисейский дворец", "title_en": "The Élysée Palace", "coords": "N 48°51'55\" | E 2°18'37\" | 59 m", "status": "found" },
   { "id": 83, "title_ru": "Здание банка \"Креди Лионне\"", "title_en": "Crédit Lyonnais Building", "coords": "N 45°45'50\" | E 4°50'33\" | 170 m", "status": "found" },
   { "id": 84, "title_ru": "Опера Лиона", "title_en": "Opéra de Lyon", "coords": "N 45°46'12\" | E 4°49'35\" | 228 m", "status": "found" },
   { "id": 85, "title_ru": "Золотые ворота", "title_en": "Golden Gate", "coords": "N 37°48'46\" | W 122°27'49\" | 7 m", "status": "found" },
   { "id": 86, "title_ru": "Статуя Свободы", "title_en": "Statue of Liberty", "coords": "N 40°41'00\" | W 74°02'18\" | 0 m", "status": "found" },
   { "id": 87, "title_ru": "Хеопс", "title_en": "Cheops", "coords": "N 29°59'33\" | E 31°03'41\" | 256 m", "status": "found" },
-  { "id": 88, "title_ru": "Хищник", "title_en": "Predator", "coords": "S 1°19'02\" | W 90°28'26\" | 254 m", "status": "found" },
+  { "id": 88, "title_ru": "Велоцираптор", "title_en": "Velociraptor", "coords": "S 1°19'02\" | W 90°28'26\" | 254 m", "status": "found" },
   { "id": 89, "title_ru": "Брахиозавр", "title_en": "Brachiosaurus", "coords": "S 1°19'02\" | W 90°28'27\" | 252 m", "status": "found" },
   
   { "id": 90, "title_ru": "Птеродактиль", "title_en": "Pterodactyl", "coords": "???", "status": "found" },
@@ -115,8 +115,8 @@
   { "id": 103, "title_ru": "Робот", "title_en": "Robot", "coords": "???", "status": "found" },
   { "id": 104, "title_ru": "Багз Банни", "title_en": "Bugs Bunny", "coords": "???", "status": "found" },
   { "id": 105, "title_ru": "Робинзон", "title_en": "Robinson", "coords": "???", "status": "missing" },
-  { "id": 106, "title_ru": "Сумасшедшая корова", "title_en": "Mad Cow", "coords": "???", "status": "found" },
+  { "id": 106, "title_ru": "Сумасшедшая корова", "title_en": "Crazy Cow", "coords": "???", "status": "found" },
   { "id": 107, "title_ru": "Йети", "title_en": "Yeti", "coords": "???", "status": "found" },
-  { "id": 108, "title_ru": "msat", "title_en": "msat", "coords": "???", "status": "found" },
-  { "id": 109, "title_ru": "Команда разработчиков", "title_en": "Dev Team", "coords": "???", "status": "found" }
+  { "id": 108, "title_ru": "M SAT", "title_en": "M SAT", "coords": "???", "status": "found" },
+  { "id": 109, "title_ru": "Команда разработчиков", "title_en": "EMG", "coords": "???", "status": "found" }
 ]
