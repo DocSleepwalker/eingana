@@ -52,7 +52,7 @@
   { "id": 46, "title_ru": "Кенгуру", "title_en": "Kangaroo", "coords": "S 20°21'27\" | E 131°15'53\" | 432 m", "status": "found" },
   { "id": 47, "title_ru": "Коала", "title_en": "Koala", "coords": "S 36°14'21\" | E 148°09'52\" | 735 m", "status": "found" },
   { "id": 48, "title_ru": "Гиена", "title_en": "Hyena", "coords": "S 11°30'25\" | E 23°39'41\" | 1,111 m", "status": "found" },
-  { "id": 49, "title_ru": "Волк", "title_en": "Wolf", "coords": "???", "status": "missing" },
+  { "id": 49, "title_ru": "Волк", "title_en": "Wolf", "coords": "N 42°40'10\" | W 0°00'01\" | 2,551 m", "status": "found" },
   
   { "id": 50, "title_ru": "Лиса", "title_en": "Fox", "coords": "N 50°09'38\" | E 16°09'42\" | 307 m", "status": "found" },
   { "id": 51, "title_ru": "Пеликан", "title_en": "Pelican", "coords": "N 24°26'34\" | E 88°14'13\" | 40 m", "status": "found" },
