@@ -36,7 +36,7 @@
   { "id": 31, "title_ru": "Гиппопотам", "title_en": "Hippopotamus", "coords": "S 12°10'21\" | E 34°44'21\" | 471 m", "status": "found" },
   { "id": 32, "title_ru": "Гепард", "title_en": "Cheetah", "coords": "N 13°44'00\" | W 15°46'39\" | 8 m", "status": "found" },
   { "id": 33, "title_ru": "Горилла", "title_en": "Gorilla", "coords": "S 6°02'02\" | E 18°35'02\" | 845 m", "status": "found" },
-  { "id": 34, "title_ru": "Сернобык", "title_en": "Gnu", "coords": "???", "status": "missing" },
+  { "id": 34, "title_ru": "Сернобык", "title_en": "Oryx", "coords": "N 24°13'00\" | E 56°01'24\" | 457 m", "status": "found" },
   { "id": 35, "title_ru": "Антилопа", "title_en": "Antelope", "coords": "N 4°55'36\" | E 24°31'51\" | 613 m", "status": "found" },
   { "id": 36, "title_ru": "Бабуин", "title_en": "Baboon", "coords": "N 4°53'47\" | E 24°30'29\" | 609 m", "status": "found" },
   { "id": 37, "title_ru": "Бородавочник", "title_en": "Warthog", "coords": "N 4°53'44\" | E 24°30'31\" | 610 m", "status": "found" },
@@ -74,7 +74,7 @@
   { "id": 66, "title_ru": "Панда", "title_en": "Panda", "coords": "N 35°15'59\" | E 109°19'26\" | 1,371 m", "status": "found" },
   { "id": 67, "title_ru": "Игуана", "title_en": "Iguana", "coords": "S 0°37'07\" | W 90°32'50\" | 0 m", "status": "found" },
   { "id": 68, "title_ru": "Тигр", "title_en": "Tiger", "coords": "N 25°25'09\" | E 90°44'23\" | 279 m", "status": "found" },
-  { "id": 69, "title_ru": "Гремучая змея", "title_en": "Rattlesnake", "coords": "???", "status": "missing" },
+  { "id": 69, "title_ru": "Гремучая змея", "title_en": "Rattlesnake", "coords": "N 31°19'06\" | W 104°15'50\" | 1,148 m", "status": "found" },
   
   { "id": 70, "title_ru": "Питон", "title_en": "Python", "coords": "S 37°47'58\" | E 147°52'52\" | 8 m", "status": "found" },
   { "id": 71, "title_ru": "Уж", "title_en": "Grass Snake", "coords": "N 13°28'15\" | W 64°13'59\" | 10 m", "status": "found" },
